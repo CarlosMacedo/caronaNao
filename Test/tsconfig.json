@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "module": "commonjs", 
+        "outDir": "built/teste", 
+        "sourceMap": true, 
+        "target": "es5"
+    }, 
+    "files": [
+        "pessoa.ts",
+        "aluno.ts"
+    ]
+}
