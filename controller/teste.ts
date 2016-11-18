@@ -7,7 +7,7 @@ class Teste{
 
 	mostraNome(){
 		var p:Passageiro=new Passageiro("paulo","9922-3221");
-		p.Nome="jose";
+		p.nome="jose";
 	}
 
 }
