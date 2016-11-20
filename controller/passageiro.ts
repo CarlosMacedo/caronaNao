@@ -11,15 +11,12 @@ export class Passageiro implements Ipassageiro{
 	
 	//Atributos basicos da class
 	private _divida:number=0.0;
-	private _id;
-
 
 	//construtor
-	constructor(private _nome:string,private _celular:string,id?:number,divida?:number){
+	constructor(private _nome:string,private _celular:string,private _id?:number,divida?:number){
 		this._divida=divida; //atributo não obrigatorio pq em alguns objetos eu já recebo a divida e em outros ele não recebe sendo assim fica opcional iniciar esse valor ou não, caso não inicie ele já é predefinido com 0.0
-		this._id=id;//outro atributo opcional, pq quando recuperamos os dados no banco esse atributo tem valor, mas em outras ocasioes ele nao tem valor
+		
 	}
-
 
 
 	//metodos de controle de encapsulamento da class
