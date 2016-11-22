@@ -14,8 +14,6 @@ export class DAOPassageiro{
         this.db = new SQLite();
     }
 
-
-
     add(dados){
 
         this.db.openDatabase({name: "data.db", location: "default"}).then(() => {
@@ -35,7 +33,34 @@ export class DAOPassageiro{
     }
 
 
-	busca(condicaoString,condicaoArray){
+    atualiza(stringCondicao,arrayCondicao){
+
+        var self=this;
+        this.db.openDatabase({name: "data.db", location: "default"}).then(() => {
+            
+            this.db.executeSql("UPDATE passageiro SET divida='0' WHERE "+stringCondicao,arrayCondicao).then((data)=>{
+                
+                self.busca("divida>?",[0]);
+                console.log("Sucesse!");
+
+            }, (error) => {
+
+                console.log("ERROR: " + JSON.stringify(error));
+            
+            });
+
+        }, (error) => {
+        
+            console.log("ERROR: ", error);
+        
+        });
+
+
+    }
+
+
+
+	busca(condicaoString,condicaoArray):any{
 
         
         var self=this;
@@ -55,7 +80,11 @@ export class DAOPassageiro{
             console.log("ERROR: ", error);
         });
 
-        return this.listaDePassageiros;
+        //setTimeout(()=>{
+            return this.listaDePassageiros;
+        //},400);
+
+        
         
 	}
 }

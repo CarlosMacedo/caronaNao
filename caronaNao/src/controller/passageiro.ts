@@ -13,9 +13,8 @@ export class Passageiro implements Ipassageiro{
 	private _divida:number=0.0;
 
 	//construtor
-	constructor(private _nome:string,private _celular:string,private _id?:number,divida?:number){
+	constructor(private _nome:string,private _celular:string,divida?:number,private _id?:number){
 		this._divida=divida; //atributo não obrigatorio pq em alguns objetos eu já recebo a divida e em outros ele não recebe sendo assim fica opcional iniciar esse valor ou não, caso não inicie ele já é predefinido com 0.0
-		
 	}
 
 

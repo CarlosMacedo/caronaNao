@@ -3,10 +3,11 @@ import {DAOPassageiro} from "../model/DAOPassageiro";
 
 export class Financeiro{
 	
-	public listaDePassageirosDevedores:DAOPassageiro;
+	public daoPassageiro:DAOPassageiro;
+	public listaDePassageirosDevedores:Array<Passageiro>;
 
 	constructor() {
-		this.listaDePassageirosDevedores=new DAOPassageiro();
+		this.daoPassageiro=new DAOPassageiro();
 	}
 
 	divideCustoPorN(){
@@ -18,26 +19,35 @@ export class Financeiro{
 	}
 
 	add(){
-		this.listaDePassageirosDevedores.add({"nome":"paulo","celular":"99322128","divida":"10"});
-		this.listaDePassageirosDevedores.add({"nome":"Jose","celular":"99362128","divida":"15"});
-		this.listaDePassageirosDevedores.add({"nome":"Maria","celular":"99722128","divida":"8"});
-		this.listaDePassageirosDevedores.add({"nome":"Lucia","celular":"99822128","divida":"2"});
+		this.daoPassageiro.add({"nome":"paulo","celular":"99322128","divida":"10"});
+		this.daoPassageiro.add({"nome":"Jose","celular":"99362128","divida":"15"});
+		this.daoPassageiro.add({"nome":"Maria","celular":"99722128","divida":"8"});
+		this.daoPassageiro.add({"nome":"Lucia","celular":"99822128","divida":"2"});
 	}
 
-	listaPassageirosDevedores():Array<Passageiro>{
-		var pesquisa=this.listaDePassageirosDevedores.busca("divida>?",[0]);
+
+	paga(id){
+		this.daoPassageiro.atualiza("id=?",[id]);
+	}
+
+	listaPassageirosDevedores(){
+		this.daoPassageiro.busca("divida>?",[0]);
+		
+		var self=this;
 		var listaPassageiros=[];
+		
+		setTimeout(()=>{
+		 var pesquisa=self.daoPassageiro.listaDePassageiros;
 		 if(pesquisa.rows.length > 0) {
 			for(var i = 0; i < pesquisa.rows.length; i++) {
-				listaPassageiros.push(new Passageiro(pesquisa.rows.item(i).nome,pesquisa.rows.item(i).celular));
+				listaPassageiros.push(new Passageiro(pesquisa.rows.item(i).nome,pesquisa.rows.item(i).celular,pesquisa.rows.item(i).divida,pesquisa.rows.item(i).id));
 			}
-			return listaPassageiros;
+			self.listaDePassageirosDevedores=listaPassageiros;
 	 	}else{
-			return [new Passageiro(null,null)];
+			self.listaDePassageirosDevedores=[new Passageiro(null,null)];
 		}
 
-			
-		
+		},400);
 	}
 
 
