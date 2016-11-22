@@ -1,8 +1,9 @@
 import {Passageiro} from './passageiro';
 
-export interface Viagem{
+export interface IViagem{
 	//Atributos
 	pontoDePartida:number;
+	destino:number;
 	/*destino:number;
 	consumoVeiculo:number;
 	valorCombustivel:number;
@@ -12,14 +13,14 @@ export interface Viagem{
 	//medotos da interface
 	embarcar(Passageiro):void;
 	desembarcar(Passageiro):void;
-	addPassageiro(Passageiro):void;
-	excluirPassageiro(Passageiro):void;
+	//addPassageiro(Passageiro):void;
+	//excluirPassageiro(Passageiro):void;
 	salvarViagemComoPredefinida():void;
 	concluirViagem():void;
 	
 }
 
-export class Passageiro implements Ipassageiro{
+export class Viagem implements IViagem{
 	
 	//private _passageiros: Array<Passageiro>;
 	
@@ -40,7 +41,23 @@ export class Passageiro implements Ipassageiro{
 	get pontoDePartida():number{
 		return this._pontoDePartida;
 	}
+	
+	set destino(p: number){
+		this._destino=p;
+	}
 	get destino():number{
 		return this._destino;
+	}
+	
+	
+	public embarcar(p:Passageiro){
+		this._passageiros.push(p);
+	}
+	
+	public desembarcar(p:Passageiro){
+		
+		let toRemove:number = this._passageiros.indexOf(p);
+		
+		this._passageiros.splice(toRemove, 1);
 	}
 }
